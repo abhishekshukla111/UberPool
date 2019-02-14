@@ -46,5 +46,7 @@
 		<string>googlechromes</string>
 		<string>comgooglemaps</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Application will use your location</string>
 </dict>
 </plist>
