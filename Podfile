@@ -8,6 +8,9 @@ target 'UberPool' do
   # Pods for UberPool
   pod 'GoogleMaps'
   pod 'GooglePlaces'
+  pod 'GooglePlacesAPI'
+  pod 'SwiftyJSON'
+  pod 'Alamofire'
 
   target 'UberPoolTests' do
     inherit! :search_paths
