@@ -39,7 +39,10 @@ class ViewController: UIViewController {
         
         //Your map initiation code
         let startlocation = CLLocation(latitude: 28.617500, longitude: 77.208228)
-        let endLocation = CLLocation(latitude: 28.615276, longitude: 77.199444)
+        //let endLocation = CLLocation(latitude: 28.615276, longitude: 77.199444) //Rashtpathi bhavan
+        //let endLocation = CLLocation(latitude: 28.569090, longitude: 77.122422) //Airport
+        let endLocation = CLLocation(latitude: 28.643796, longitude: 77.218396) //NDLS
+        
         let camera = GMSCameraPosition.camera(withLatitude: startlocation.coordinate.latitude, longitude: startlocation.coordinate.longitude, zoom: 15.0)
         googleMaps = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         
@@ -57,6 +60,7 @@ class ViewController: UIViewController {
         createMarker(titleMarker: "Rashtrapati Bhavan", latitude: endLocation.coordinate.latitude, longitude: endLocation.coordinate.longitude)
         
         drawPath(startLocation: startlocation, endLocation: endLocation)
+        getDistance(startLocation: startlocation, endLocation: endLocation)
         
         self.googleMaps?.animate(to: camera)
 
@@ -79,8 +83,11 @@ class ViewController: UIViewController {
         let destination = "\(endLocation.coordinate.latitude),\(endLocation.coordinate.longitude)"
         
         
-        let url = "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&mode=driving&key=AIzaSyCeZMQyak_ixe9tVcsedmXEjfvOLwofAiA"
-        
+        //let url = "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&mode=driving&key=AIzaSyCeZMQyak_ixe9tVcsedmXEjfvOLwofAiA"
+        let url = "https://maps.googleapis.com/maps/api/directions/json?origin=Parliament+Of+India,New+Delhi&destination=NDLS+Railway+Station,+New+Delhi&mode=driving&key=AIzaSyCeZMQyak_ixe9tVcsedmXEjfvOLwofAiA&waypoints=optimize:true%7C28.613841,77.132252%7C28.613195,77.229488%7C28.641980,77.249560"
+        //let url = "https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood&key=AIzaSyCeZMQyak_ixe9tVcsedmXEjfvOLwofAiA"
+        //let url = "https://maps.googleapis.com/maps/api/directions/json?origin=New Delhi Railway Station&destination=New Delhi Airport&mode=driving&key=AIzaSyCeZMQyak_ixe9tVcsedmXEjfvOLwofAiA"
+        //let url = "http://maps.googleapis.com/maps/api/directions/json?origin=Adelaide,SA&destination=Adelaide,SA&waypoints=optimize:true|Barossa+Valley,SA|Clare,SA|Connawarra,SA|McLaren+Vale,SA&sensor=false&key=AIzaSyCeZMQyak_ixe9tVcsedmXEjfvOLwofAiA"
         Alamofire.request(url).responseJSON { response in
             
             print(response.request as Any)  // original URL request
@@ -89,10 +96,11 @@ class ViewController: UIViewController {
             print(response.result as Any)   // result of response serialization
             
             var routes: [JSON] = []
-            
+            //let bounds: [String : JSON]?
             do {
                 let json = try JSON(data: response.data!)
                 routes = json["routes"].arrayValue
+                //bounds = json["bounds"].dictionary
             } catch let error {
                 print("Error: \(error)")
             }
@@ -109,7 +117,38 @@ class ViewController: UIViewController {
                 polyline.map = self.googleMaps
             }
             
+            let bounds = GMSCoordinateBounds(coordinate: startLocation.coordinate, coordinate: endLocation.coordinate)
+            //bounds.includingCoordinate(<#T##coordinate: CLLocationCoordinate2D##CLLocationCoordinate2D#>)
+            self.googleMaps?.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 100))
+            
         }
+    }
+    
+    func getDistance(startLocation: CLLocation, endLocation: CLLocation)
+    {
+        let origin = "\(startLocation.coordinate.latitude),\(startLocation.coordinate.longitude)"
+        let destination = "\(endLocation.coordinate.latitude),\(endLocation.coordinate.longitude)"
+        let rajGhat = "28.641980,77.249560"
+        let indiaGate = "28.613195,77.229488"
+        let armyHospital = "28.613841,77.132252"
+        //let url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=40.6655101,-73.89188969999998&destinations=40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.659569%2C-73.933783%7C40.729029%2C-73.851524%7C40.6860072%2C-73.6334271%7C40.598566%2C-73.7527626%7C40.659569%2C-73.933783%7C40.729029%2C-73.851524%7C40.6860072%2C-73.6334271%7C40.598566%2C-73.7527626&key=AIzaSyCeZMQyak_ixe9tVcsedmXEjfvOLwofAiA"
+        let url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=\(origin)&destinations=\(destination)%7C\(rajGhat)&key=AIzaSyCeZMQyak_ixe9tVcsedmXEjfvOLwofAiA"
+
+    
+    
+         Alamofire.request(url).responseJSON { response in
+            
+            //print(response)
+            do {
+                let json = try JSON(data: response.data!)
+                print(json)
+                //routes = json["routes"].arrayValue
+                //bounds = json["bounds"].dictionary
+            } catch let error {
+                print("Error: \(error)")
+            }
+        }
+    
     }
 
 
