@@ -13,6 +13,7 @@
 		5180AE9022150C27001D3199 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5180AE8F22150C27001D3199 /* Assets.xcassets */; };
 		5180AE9322150C27001D3199 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5180AE9122150C27001D3199 /* LaunchScreen.storyboard */; };
 		5180AE9E22150C27001D3199 /* UberPoolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5180AE9D22150C27001D3199 /* UberPoolTests.swift */; };
+		5180AEA822151D5F001D3199 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5180AE9422150C27001D3199 /* Info.plist */; };
 		D74D1B98945F0FF1356F92A9 /* Pods_UberPool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A14B4CE0C80B69C87D080F92 /* Pods_UberPool.framework */; };
 		FF639DB90735F8EC675FE301 /* Pods_UberPoolTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1B532A8F925C7688F0D5F96 /* Pods_UberPoolTests.framework */; };
 /* End PBXBuildFile section */
@@ -212,6 +213,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5180AEA822151D5F001D3199 /* Info.plist in Resources */,
 				5180AE9322150C27001D3199 /* LaunchScreen.storyboard in Resources */,
 				5180AE9022150C27001D3199 /* Assets.xcassets in Resources */,
 				5180AE8E22150C26001D3199 /* Main.storyboard in Resources */,
