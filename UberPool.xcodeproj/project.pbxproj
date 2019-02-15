@@ -14,6 +14,8 @@
 		5180AE9322150C27001D3199 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5180AE9122150C27001D3199 /* LaunchScreen.storyboard */; };
 		5180AE9E22150C27001D3199 /* UberPoolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5180AE9D22150C27001D3199 /* UberPoolTests.swift */; };
 		8EE390C122166F75003967FE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE390C022166F75003967FE /* Constants.swift */; };
+		8EE390C522167B46003967FE /* UBGoogleAPIHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE390C422167B46003967FE /* UBGoogleAPIHandler.swift */; };
+		8EE390C722167B64003967FE /* UBGMSMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE390C622167B64003967FE /* UBGMSMapView.swift */; };
 		D74D1B98945F0FF1356F92A9 /* Pods_UberPool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A14B4CE0C80B69C87D080F92 /* Pods_UberPool.framework */; };
 		FF639DB90735F8EC675FE301 /* Pods_UberPoolTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1B532A8F925C7688F0D5F96 /* Pods_UberPoolTests.framework */; };
 /* End PBXBuildFile section */
@@ -43,6 +45,8 @@
 		7B9DAE30B63DC7B49299691C /* Pods-UberPool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UberPool.release.xcconfig"; path = "Pods/Target Support Files/Pods-UberPool/Pods-UberPool.release.xcconfig"; sourceTree = "<group>"; };
 		7EC4652FA5FB6E119F25EAFD /* Pods-UberPoolTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UberPoolTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UberPoolTests/Pods-UberPoolTests.release.xcconfig"; sourceTree = "<group>"; };
 		8EE390C022166F75003967FE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		8EE390C422167B46003967FE /* UBGoogleAPIHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UBGoogleAPIHandler.swift; sourceTree = "<group>"; };
+		8EE390C622167B64003967FE /* UBGMSMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UBGMSMapView.swift; sourceTree = "<group>"; };
 		A14B4CE0C80B69C87D080F92 /* Pods_UberPool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UberPool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E0C4055044B16300B68EE4 /* Pods-UberPoolTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UberPoolTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UberPoolTests/Pods-UberPoolTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B1B532A8F925C7688F0D5F96 /* Pods_UberPoolTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UberPoolTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,8 +116,10 @@
 			isa = PBXGroup;
 			children = (
 				5180AE8822150C26001D3199 /* AppDelegate.swift */,
-				5180AE8A22150C26001D3199 /* ViewController.swift */,
 				8EE390C022166F75003967FE /* Constants.swift */,
+				5180AE8A22150C26001D3199 /* ViewController.swift */,
+				8EE390C622167B64003967FE /* UBGMSMapView.swift */,
+				8EE390C422167B46003967FE /* UBGoogleAPIHandler.swift */,
 				5180AE8C22150C26001D3199 /* Main.storyboard */,
 				5180AE8F22150C27001D3199 /* Assets.xcassets */,
 				5180AE9122150C27001D3199 /* LaunchScreen.storyboard */,
@@ -338,6 +344,8 @@
 				5180AE8B22150C26001D3199 /* ViewController.swift in Sources */,
 				5180AE8922150C26001D3199 /* AppDelegate.swift in Sources */,
 				8EE390C122166F75003967FE /* Constants.swift in Sources */,
+				8EE390C722167B64003967FE /* UBGMSMapView.swift in Sources */,
+				8EE390C522167B46003967FE /* UBGoogleAPIHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,12 +509,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B8W6C29XUS;
 				INFOPLIST_FILE = UberPool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Self.UberPool;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.comcast.home.Tech360-QA";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -519,12 +528,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B8W6C29XUS;
 				INFOPLIST_FILE = UberPool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Self.UberPool;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.comcast.home.Tech360-QA";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
