@@ -68,7 +68,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IqM-s7-0f8">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IqM-s7-0f8">
                                         <rect key="frame" x="237" y="105" width="76" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="3Xz-4f-7SE"/>
@@ -92,11 +92,11 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4VO-Ln-lpA">
-                                        <rect key="frame" x="58" y="103" width="60" height="25"/>
+                                        <rect key="frame" x="60" y="103" width="56" height="25"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                        <state key="normal" title="Get History"/>
+                                        <state key="normal" title="Quick Test"/>
                                         <connections>
-                                            <action selector="getDirectionAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YPC-eu-nrc"/>
+                                            <action selector="quickTestAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LYr-nT-jRn"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -148,8 +148,8 @@
                     <connections>
                         <outlet property="destinationTextField1" destination="i8j-Vh-H5i" id="JET-TI-UHx"/>
                         <outlet property="destinationTextField2" destination="kxk-FV-6va" id="QHQ-Ie-8ST"/>
+                        <outlet property="getDirectionButton" destination="IqM-s7-0f8" id="MtP-XG-6Of"/>
                         <outlet property="googleMaps" destination="VuY-II-EC7" id="5Sg-oY-44X"/>
-                        <outlet property="inputContainerView" destination="kIb-2G-1nK" id="eT4-W6-dCa"/>
                         <outlet property="startTextField1" destination="bSE-ZL-hzE" id="3cG-oy-ob9"/>
                         <outlet property="startTextField2" destination="JgW-l8-TSA" id="ukh-sG-dvp"/>
                     </connections>

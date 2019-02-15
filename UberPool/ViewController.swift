@@ -13,7 +13,7 @@ import SwiftyJSON
 class ViewController: UIViewController {
    
     @IBOutlet weak var googleMaps: UBGMSMapView!
-    @IBOutlet weak var inputContainerView: UIView!
+    @IBOutlet weak var getDirectionButton: UIButton!
     
     @IBOutlet weak var startTextField1: UITextField!
     @IBOutlet weak var destinationTextField1: UITextField!
@@ -23,20 +23,24 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
-        //let endLocation = CLLocation(latitude: 28.615276, longitude: 77.199444) //Rashtpathi bhavan
-        //let endLocation = CLLocation(latitude: 28.569090, longitude: 77.122422) //Airport
-       
-        //        let camera = GMSCameraPosition.camera(withLatitude: startlocation.coordinate.latitude, longitude: startlocation.coordinate.longitude, zoom: 15.0)
-        //
-        //        googleMaps?.camera = camera
-        //        googleMaps?.delegate = self
+        addRightBarButton()
+    }
+
+    @IBAction func quickTestAction (_ sender: Any){
+        //This is for demo
+        startTextField1.text = "Parliament Of India,New Delhi"
+        destinationTextField1.text = "NDLS Railway Station, New Delhi"
+        
+        startTextField2.text = "India Gate, New Delhi"
+        destinationTextField2.text = "Indira Gandhi International Airport,New Delhi"
+        
+        getDirectionButton.isEnabled = true
     }
     
     @IBAction func getDirectionAction (_ sender: Any){
         print("getDrirectionAction")
-        let getCoordinatesDispatchGroup = DispatchGroup()
+        
         
 //        let startlocation = CLLocation(latitude: 28.617500, longitude: 77.208228)
 //        let endLocation = CLLocation(latitude: 28.643796, longitude: 77.218396) //NDLS
@@ -47,22 +51,30 @@ class ViewController: UIViewController {
 //                         CLLocation(latitude: 28.569090, longitude: 77.122422)]
         
         
+        var locationArray: [String] = []
+        locationArray.append(startTextField1.text!)
+        locationArray.append(destinationTextField1.text!)
+        locationArray.append(startTextField2.text!)
+        locationArray.append(destinationTextField2.text!)
         
-        //getDistance(startLocation: startlocation, endLocation: endLocation, wayPoints: nil)
+        getCoordinates(from: locationArray)
+    }
+    
+    func getCoordinates(from locationArray: [String]){
+        let dispatchGroup = DispatchGroup()
         
-        let locationArray = ["Parliament Of India,New Delhi", "NDLS Railway Station, New Delhi", "India Gate, New Delhi", "Indira Gandhi International Airport,New Delhi"]
         var clLocationArray: [CLLocation] = []
         for location in locationArray{
-            getCoordinatesDispatchGroup.enter()
+            dispatchGroup.enter()
             getCoordinates(from: location) { (location) in
                 clLocationArray.append(location)
-                getCoordinatesDispatchGroup.leave()
+                dispatchGroup.leave()
             }
         }
         
-        _ = getCoordinatesDispatchGroup.wait(timeout: DispatchTime(uptimeNanoseconds: 60 * 1000000000))
+        _ = dispatchGroup.wait(timeout: DispatchTime(uptimeNanoseconds: 60 * 1000000000))
         
-        getCoordinatesDispatchGroup.notify(queue: .main) {
+        dispatchGroup.notify(queue: .main) {
             print("All executed")
             print(clLocationArray)
             
@@ -147,6 +159,20 @@ class ViewController: UIViewController {
             bounds = bounds.includingCoordinate(wayPoint.coordinate)
         }
         self.googleMaps?.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 40))
+    }
+    
+    
+    private func addRightBarButton(){
+        let navItem = UINavigationItem(title: "Uber Pool")
+        
+        let historyBarButton = UIBarButtonItem(title: "History", style: .plain, target: self, action: #selector(historyButtonAction(_:)))
+        navItem.rightBarButtonItem = historyBarButton
+        
+        self.navigationController?.navigationBar.setItems([navItem], animated: false)
+    }
+    
+    @objc func historyButtonAction( _ sender: Any){
+        print("History Button Clicked")
     }
 }
 
