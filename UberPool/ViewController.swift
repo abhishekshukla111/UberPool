@@ -25,9 +25,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         addRightBarButton()
-        
-        let plistData = ArchiveUtility.shared.readPlist()
-        print(plistData as Any)
     }
 
     @IBAction func quickTestAction (_ sender: Any){
@@ -57,23 +54,23 @@ class ViewController: UIViewController {
         var clLocationArray: [CLLocation] = []
         for location in locationArray{
             dispatchGroup.enter()
-            getCoordinates(from: location) { (location) in
-                clLocationArray.append(location)
-                dispatchGroup.leave()
+            print("Start Location: \(location)")
+            DispatchQueue.main.async {
+                self.getCoordinates(from: location) { (location) in
+                    clLocationArray.append(location)
+                    print("Got Location: \(location.coordinate.latitude)")
+                    dispatchGroup.leave()
+                }
             }
         }
         
         _ = dispatchGroup.wait(timeout: DispatchTime(uptimeNanoseconds: 60 * 1000000000))
         
         dispatchGroup.notify(queue: .main) {
-            print("All executed")
-            print(clLocationArray)
-            
             let startlocation = clLocationArray[0]
             let endLocation = clLocationArray[1]
             let wayPoints = Array(clLocationArray[2...])
             self.drawPath(startLocation: startlocation, endLocation: endLocation, wayPoints: wayPoints)
-            
         }
     }
     
@@ -136,7 +133,7 @@ class ViewController: UIViewController {
     }
     
     func drawRoute(from routes: [JSON]){
-        // print route using Polyline
+        //route using Polyline
         for route in routes
         {
             let routeOverviewPolyline = route["overview_polyline"].dictionary
@@ -179,8 +176,6 @@ class ViewController: UIViewController {
     }
     
     @objc func historyButtonAction( _ sender: Any){
-        print("History Button Clicked")
-        
         let historyViewController = HistoryViewController()
         self.navigationController?.pushViewController(historyViewController, animated: true)
     }
@@ -199,10 +194,7 @@ class ViewController: UIViewController {
         let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
         
         if let year =  components.year, let month = components.month, let day = components.day, let hour = components.hour, let minute = components.minute {
-        
             dateAndTime = "\(String(describing: day))/\(String(describing: month))/\(String(describing: year)) \(hour):\(String(describing: minute))"
-            
-            print(dateAndTime)
         }
     
         return dateAndTime
@@ -235,7 +227,7 @@ extension ViewController: GMSMapViewDelegate{
     }
     
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
-        print("COORDINATE \(coordinate)") // when you tapped coordinate
+        
     }
     
     func didTapMyLocationButton(for mapView: GMSMapView) -> Bool {
@@ -257,7 +249,6 @@ extension ViewController: UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        print("Did End Editing")
         
     }
     

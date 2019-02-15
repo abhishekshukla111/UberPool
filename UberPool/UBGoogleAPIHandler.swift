@@ -39,8 +39,6 @@ class UBGoogleAPIHandler{
             }
         }
         
-        print(url)
-        
         Alamofire.request(url).responseJSON { response in
             
             var routes: [JSON] = []
@@ -69,7 +67,6 @@ class UBGoogleAPIHandler{
             if let receivedResults = response.result.value
             {
                 let resultParams = JSON(receivedResults)
-                print(resultParams) // RESULT JSON
             
                 let latitute  = resultParams["results"][0]["geometry"]["location"]["lat"].doubleValue
                 let longitute = resultParams["results"][0]["geometry"]["location"]["lng"].doubleValue
@@ -98,12 +95,9 @@ class UBGoogleAPIHandler{
             }
         }
         
-        print(url)
-        
         Alamofire.request(url).responseJSON { response in
             do {
-                let json = try JSON(data: response.data!)
-                print(json)
+                _ = try JSON(data: response.data!)
                 completion([])
             } catch let error {
                 failure("Distances Not found with \(error)")
