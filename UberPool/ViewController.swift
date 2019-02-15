@@ -31,7 +31,6 @@ class ViewController: UIViewController {
         //This is for demo
         startTextField1.text = "Parliament Of India,New Delhi"
         destinationTextField1.text = "NDLS Railway Station, New Delhi"
-        
         startTextField2.text = "India Gate, New Delhi"
         destinationTextField2.text = "Indira Gandhi International Airport,New Delhi"
         
@@ -39,28 +38,14 @@ class ViewController: UIViewController {
     }
     
     @IBAction func getDirectionAction (_ sender: Any){
-        print("getDrirectionAction")
-        
-        
-//        let startlocation = CLLocation(latitude: 28.617500, longitude: 77.208228)
-//        let endLocation = CLLocation(latitude: 28.643796, longitude: 77.218396) //NDLS
-//
-//        let wayPoints = [CLLocation(latitude: 28.613841, longitude: 77.132252),
-//                         CLLocation(latitude: 28.613195, longitude: 77.229488),
-//                         CLLocation(latitude: 28.615276, longitude: 77.199444),
-//                         CLLocation(latitude: 28.569090, longitude: 77.122422)]
-        
-        
+       
+        //
         var locationArray: [String] = []
         locationArray.append(startTextField1.text!)
         locationArray.append(destinationTextField1.text!)
         locationArray.append(startTextField2.text!)
         locationArray.append(destinationTextField2.text!)
         
-        getCoordinates(from: locationArray)
-    }
-    
-    func getCoordinates(from locationArray: [String]){
         let dispatchGroup = DispatchGroup()
         
         var clLocationArray: [CLLocation] = []
@@ -83,6 +68,15 @@ class ViewController: UIViewController {
             let wayPoints = Array(clLocationArray[2...])
             self.drawPath(startLocation: startlocation, endLocation: endLocation, wayPoints: wayPoints)
         }
+    }
+    
+    @IBAction func clearAction (_ sender: Any){
+        startTextField1.text = ""
+        destinationTextField1.text = ""
+        startTextField2.text = ""
+        destinationTextField2.text = ""
+        
+        getDirectionButton.isEnabled = false
     }
     
     //Function to get the CLLocation from an Address in string
