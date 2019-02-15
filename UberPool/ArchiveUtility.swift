@@ -42,7 +42,6 @@ class ArchiveUtility {
         guard let result = try? PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [[String: Any]] else {
             return nil
         }
-        print(result as Any)
         
         return result
     }

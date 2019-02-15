@@ -10,6 +10,18 @@ import UIKit
 import GoogleMaps
 import SwiftyJSON
 
+class Location{
+    let locationString: String
+    var clLocation: CLLocation?
+    let order: Int
+    
+    init(locationString: String, clLocation: CLLocation?, order: Int){
+        self.locationString = locationString
+        self.clLocation = clLocation
+        self.order = order
+    }
+}
+
 class ViewController: UIViewController {
    
     @IBOutlet weak var googleMaps: UBGMSMapView!
@@ -30,9 +42,9 @@ class ViewController: UIViewController {
     @IBAction func quickTestAction (_ sender: Any){
         //This is for demo
         startTextField1.text = "Delhi"
-        destinationTextField1.text = "Lucknow"
-        startTextField2.text = "Patna"
-        destinationTextField2.text = "Mumbai"
+        destinationTextField1.text = "Mumbai"
+        startTextField2.text = "Lucknow"
+        destinationTextField2.text = "Patna"
         
         getDirectionButton.isEnabled = true
     }
@@ -43,22 +55,19 @@ class ViewController: UIViewController {
         resignAllTextfields()
         googleMaps.clear()
         
-        var locationArray: [String] = []
-        locationArray.append(startTextField1.text!)
-        locationArray.append(destinationTextField1.text!)
-        locationArray.append(startTextField2.text!)
-        locationArray.append(destinationTextField2.text!)
+        var locationStructArray: [Location] = []
+        locationStructArray.append(Location(locationString: startTextField1.text!, clLocation: nil, order: 0))
+        locationStructArray.append(Location(locationString: destinationTextField1.text!, clLocation: nil, order: 1))
+        locationStructArray.append(Location(locationString: startTextField2.text!, clLocation: nil, order: 2))
+        locationStructArray.append(Location(locationString: destinationTextField2.text!, clLocation: nil, order: 3))
         
         let dispatchGroup = DispatchGroup()
-        
-        var clLocationArray: [CLLocation] = []
-        for location in locationArray{
+    
+        for locationStruct in locationStructArray{
             dispatchGroup.enter()
-            print("Start Location: \(location)")
             DispatchQueue.main.async {
-                self.getCoordinates(from: location) { (location) in
-                    clLocationArray.append(location)
-                    print("Got Location: \(location.coordinate.latitude)")
+                self.getCoordinates(from: locationStruct) { (location) in
+                    locationStruct.clLocation = location
                     dispatchGroup.leave()
                 }
             }
@@ -67,10 +76,18 @@ class ViewController: UIViewController {
         _ = dispatchGroup.wait(timeout: DispatchTime(uptimeNanoseconds: 60 * 1000000000))
         
         dispatchGroup.notify(queue: .main) {
-            let startlocation = clLocationArray[0]
-            let endLocation = clLocationArray[1]
-            let wayPoints = Array(clLocationArray[2...])
-            self.drawPath(startLocation: startlocation, endLocation: endLocation, wayPoints: wayPoints)
+            
+            _ = locationStructArray.sorted(by: { $0.order < $1.order })
+            
+            let startlocation = locationStructArray[0].clLocation
+            let endLocation = locationStructArray[1].clLocation
+            let wayPointsStruct = Array(locationStructArray[2...])
+            
+            var wayPoints: [CLLocation] = []
+            for wayPoint in wayPointsStruct{
+                wayPoints.append(wayPoint.clLocation!)
+            }
+            self.drawPath(startLocation: startlocation!, endLocation: endLocation!, wayPoints:wayPoints)
         }
     }
     
@@ -84,8 +101,8 @@ class ViewController: UIViewController {
     }
     
     //Function to get the CLLocation from an Address in string
-    func getCoordinates(from address:String, completion: @escaping (_ location: CLLocation)->()){
-        UBGoogleAPIHandler().getCoordinates(from: address, completion: { (location) in
+    func getCoordinates(from locationStruct:Location, completion: @escaping (_ locationStruct: CLLocation)->()){
+        UBGoogleAPIHandler().getCoordinates(from: locationStruct.locationString, completion: { (location) in
             if let location = location{
                 completion(location)
             }
