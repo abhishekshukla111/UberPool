@@ -82,7 +82,7 @@ class ViewController: UIViewController {
         destinationTextField1.text = ""
         startTextField2.text = ""
         destinationTextField2.text = ""
-        
+        googleMaps.clear()
         getDirectionButton.isEnabled = false
     }
     
