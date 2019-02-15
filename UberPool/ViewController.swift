@@ -25,6 +25,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         addRightBarButton()
+        
+        let plistData = ArchiveUtility.shared.readPlist()
+        print(plistData)
     }
 
     @IBAction func quickTestAction (_ sender: Any){
@@ -120,6 +123,10 @@ class ViewController: UIViewController {
             self.drawRoute(from: routes)
             self.addBounds(startLocation: startLocation, endLocation: endLocation, wayPoints: wayPoints)
             self.addMarkers(startLocation: startLocation, endLocation: endLocation, wayPoints: wayPoints)
+            
+            let data = ["Date": "Feb 15", "StartLocation":"\(startLocation.coordinate.latitude), \(startLocation.coordinate.longitude)","EndLocation":"\(startLocation.coordinate.latitude), \(startLocation.coordinate.longitude)"]
+            
+            ArchiveUtility.shared.updateData(data: data)
             
         }) { (error) in
             print("\(error)")

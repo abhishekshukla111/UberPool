@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         //Add Google API Key
         GMSServices.provideAPIKey(Constants.APIKey.rawValue)
+        ArchiveUtility.shared.createPlist()
         return true
     }
 
