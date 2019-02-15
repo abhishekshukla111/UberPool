@@ -39,6 +39,7 @@ class ViewController: UIViewController {
     
     @IBAction func getDirectionAction (_ sender: Any){
        
+        resignAllTextfields()
         //
         var locationArray: [String] = []
         locationArray.append(startTextField1.text!)
@@ -168,6 +169,13 @@ class ViewController: UIViewController {
     @objc func historyButtonAction( _ sender: Any){
         print("History Button Clicked")
     }
+    
+    private func resignAllTextfields(){
+        startTextField1.resignFirstResponder()
+        startTextField2.resignFirstResponder()
+        destinationTextField1.resignFirstResponder()
+        destinationTextField2.resignFirstResponder()
+    }
 }
 
 //MARK: CLLocationManagerDelegate
@@ -201,6 +209,43 @@ extension ViewController: GMSMapViewDelegate{
     
     func didTapMyLocationButton(for mapView: GMSMapView) -> Bool {
         return false
+    }
+    
+}
+
+// MARK: Text Field Delegates
+extension ViewController: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        validateAllTextFieldHasData()
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print("Did End Editing")
+        
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+    
+        return true
+    }
+    
+    
+    func validateAllTextFieldHasData(){
+        if (startTextField1.text?.isEmpty)! ||
+            (startTextField2.text?.isEmpty)! ||
+            (destinationTextField1.text?.isEmpty)! ||
+            (destinationTextField2.text?.isEmpty)!{
+            getDirectionButton.isEnabled = false
+        }else{
+            getDirectionButton.isEnabled = true
+        }
     }
     
 }
