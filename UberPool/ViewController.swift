@@ -27,15 +27,15 @@ class ViewController: UIViewController {
         addRightBarButton()
         
         let plistData = ArchiveUtility.shared.readPlist()
-        print(plistData)
+        print(plistData as Any)
     }
 
     @IBAction func quickTestAction (_ sender: Any){
         //This is for demo
-        startTextField1.text = "Parliament Of India,New Delhi"
-        destinationTextField1.text = "NDLS Railway Station, New Delhi"
-        startTextField2.text = "India Gate, New Delhi"
-        destinationTextField2.text = "Indira Gandhi International Airport,New Delhi"
+        startTextField1.text = "Delhi"
+        destinationTextField1.text = "Lucknow"
+        startTextField2.text = "Patna"
+        destinationTextField2.text = "Mumbai"
         
         getDirectionButton.isEnabled = true
     }

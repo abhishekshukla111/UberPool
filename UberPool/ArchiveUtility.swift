@@ -17,8 +17,6 @@ class ArchiveUtility {
     
     init() {
         path = documentDirectory.appending("/History.plist")
-        print("Path: \(path)")
-        
         createPlist()
     }
     
@@ -63,24 +61,4 @@ class ArchiveUtility {
         }
         
     }
-    //        let content = result! as NSArray
-    //        result?.append(["Abhishke":"Shukla"])
-    //        let success:Bool = content.write(toFile: filePath, atomically: true)
-    //        if success {
-    //            print("file has been created!")
-    //        }else{
-    //            print("unable to create the file")
-    //        }
-    
-    //appendDataToPlist(fileURL)
-    
-    
-    //    func appendDataToPlist(_ fileURL: URL){
-    //        var dataDic = readPlist(fileURL)
-    //        //dataDic.
-    //    }
-    
-   
-    
-    
 }
