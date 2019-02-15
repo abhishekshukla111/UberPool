@@ -13,6 +13,7 @@
 		5180AE9022150C27001D3199 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5180AE8F22150C27001D3199 /* Assets.xcassets */; };
 		5180AE9322150C27001D3199 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5180AE9122150C27001D3199 /* LaunchScreen.storyboard */; };
 		5180AE9E22150C27001D3199 /* UberPoolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5180AE9D22150C27001D3199 /* UberPoolTests.swift */; };
+		8EE390C122166F75003967FE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE390C022166F75003967FE /* Constants.swift */; };
 		D74D1B98945F0FF1356F92A9 /* Pods_UberPool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A14B4CE0C80B69C87D080F92 /* Pods_UberPool.framework */; };
 		FF639DB90735F8EC675FE301 /* Pods_UberPoolTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1B532A8F925C7688F0D5F96 /* Pods_UberPoolTests.framework */; };
 /* End PBXBuildFile section */
@@ -41,6 +42,7 @@
 		6DAD77472D3EBBA40BE80991 /* Pods-UberPool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UberPool.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UberPool/Pods-UberPool.debug.xcconfig"; sourceTree = "<group>"; };
 		7B9DAE30B63DC7B49299691C /* Pods-UberPool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UberPool.release.xcconfig"; path = "Pods/Target Support Files/Pods-UberPool/Pods-UberPool.release.xcconfig"; sourceTree = "<group>"; };
 		7EC4652FA5FB6E119F25EAFD /* Pods-UberPoolTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UberPoolTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UberPoolTests/Pods-UberPoolTests.release.xcconfig"; sourceTree = "<group>"; };
+		8EE390C022166F75003967FE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A14B4CE0C80B69C87D080F92 /* Pods_UberPool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UberPool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E0C4055044B16300B68EE4 /* Pods-UberPoolTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UberPoolTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UberPoolTests/Pods-UberPoolTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B1B532A8F925C7688F0D5F96 /* Pods_UberPoolTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UberPoolTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,6 +113,7 @@
 			children = (
 				5180AE8822150C26001D3199 /* AppDelegate.swift */,
 				5180AE8A22150C26001D3199 /* ViewController.swift */,
+				8EE390C022166F75003967FE /* Constants.swift */,
 				5180AE8C22150C26001D3199 /* Main.storyboard */,
 				5180AE8F22150C27001D3199 /* Assets.xcassets */,
 				5180AE9122150C27001D3199 /* LaunchScreen.storyboard */,
@@ -334,6 +337,7 @@
 			files = (
 				5180AE8B22150C26001D3199 /* ViewController.swift in Sources */,
 				5180AE8922150C26001D3199 /* AppDelegate.swift in Sources */,
+				8EE390C122166F75003967FE /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

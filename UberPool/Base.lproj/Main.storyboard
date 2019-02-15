@@ -1,24 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FmY-FX-OOV">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Navigation Controller-->
+        <scene sceneID="jCc-6V-Hss">
+            <objects>
+                <navigationController id="FmY-FX-OOV" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="y92-iT-J5C">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="MUG-hx-XIN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6zr-h1-CY7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1559" y="-318"/>
+        </scene>
+        <!--Uber Pool-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="UberPool" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VuY-II-EC7" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="192" width="375" height="475"/>
+                                <color key="backgroundColor" red="1" green="0.39686175978934235" blue="0.20335925491257856" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kIb-2G-1nK">
+                                <rect key="frame" x="0.0" y="64" width="375" height="127"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bSE-ZL-hzE">
+                                        <rect key="frame" x="34" y="21" width="134" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i8j-Vh-H5i">
+                                        <rect key="frame" x="201" y="21" width="149" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JgW-l8-TSA">
+                                        <rect key="frame" x="34" y="64" width="134" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kxk-FV-6va">
+                                        <rect key="frame" x="201" y="64" width="149" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IqM-s7-0f8">
+                                        <rect key="frame" x="268" y="97" width="76" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="vu8-xV-Pd6"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <state key="normal" title="Get Directions"/>
+                                        <connections>
+                                            <action selector="getDirectionAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mfx-wj-HgZ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.99274525110004808" blue="0.15298721683787153" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="IqM-s7-0f8" secondAttribute="bottom" id="41o-yO-kML"/>
+                                    <constraint firstAttribute="trailing" secondItem="IqM-s7-0f8" secondAttribute="trailing" constant="31" id="kkA-hm-nDE"/>
+                                    <constraint firstAttribute="height" constant="127" id="zFp-3n-SSR"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="kIb-2G-1nK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="8n3-4n-QlR"/>
+                            <constraint firstItem="VuY-II-EC7" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="COJ-mO-cwo"/>
+                            <constraint firstItem="VuY-II-EC7" firstAttribute="top" secondItem="kIb-2G-1nK" secondAttribute="bottom" constant="1" id="Dka-DA-eXe"/>
+                            <constraint firstItem="VuY-II-EC7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="H92-gh-igU"/>
+                            <constraint firstItem="VuY-II-EC7" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="r5D-Kc-omS"/>
+                            <constraint firstItem="kIb-2G-1nK" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="rn9-AH-a03"/>
+                            <constraint firstItem="kIb-2G-1nK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="yjG-Xs-I0i"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Uber Pool" id="xP8-71-cfa"/>
+                    <connections>
+                        <outlet property="destinationTextField1" destination="i8j-Vh-H5i" id="JET-TI-UHx"/>
+                        <outlet property="destinationTextField2" destination="kxk-FV-6va" id="QHQ-Ie-8ST"/>
+                        <outlet property="googleMaps" destination="VuY-II-EC7" id="5Sg-oY-44X"/>
+                        <outlet property="inputContainerView" destination="kIb-2G-1nK" id="eT4-W6-dCa"/>
+                        <outlet property="startTextField1" destination="bSE-ZL-hzE" id="3cG-oy-ob9"/>
+                        <outlet property="startTextField2" destination="JgW-l8-TSA" id="ukh-sG-dvp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-810.39999999999998" y="-319.79010494752629"/>
         </scene>
     </scenes>
 </document>

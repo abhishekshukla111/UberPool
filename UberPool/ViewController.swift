@@ -13,55 +13,46 @@ import SwiftyJSON
 
 class ViewController: UIViewController {
    
-    var googleMaps: GMSMapView?
+
+    @IBOutlet weak var googleMaps: GMSMapView!
+    @IBOutlet weak var inputContainerView: UIView!
+    
+    @IBOutlet weak var startTextField1: UITextField!
+    @IBOutlet weak var destinationTextField1: UITextField!
+    
+    @IBOutlet weak var startTextField2: UITextField!
+    @IBOutlet weak var destinationTextField2: UITextField!
     
     var locationManager = CLLocationManager()
-    //var locationSelected = CLLocation.startLocation
-    
-    var locationStart = CLLocation()
-    var locationEnd = CLLocation()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //Add Google API Key
-        GMSServices.provideAPIKey("AIzaSyCeZMQyak_ixe9tVcsedmXEjfvOLwofAiA")
-        
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.startMonitoringSignificantLocationChanges()
-        
-        
         // Do any additional setup after loading the view, typically from a nib.
         
-        //Your map initiation code
+
         let startlocation = CLLocation(latitude: 28.617500, longitude: 77.208228)
         //let endLocation = CLLocation(latitude: 28.615276, longitude: 77.199444) //Rashtpathi bhavan
         //let endLocation = CLLocation(latitude: 28.569090, longitude: 77.122422) //Airport
         let endLocation = CLLocation(latitude: 28.643796, longitude: 77.218396) //NDLS
         
         let camera = GMSCameraPosition.camera(withLatitude: startlocation.coordinate.latitude, longitude: startlocation.coordinate.longitude, zoom: 15.0)
-        googleMaps = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
-        
-        //googleMaps?.camera = camera
+       
+        googleMaps?.camera = camera
         googleMaps?.delegate = self
         googleMaps?.isMyLocationEnabled = true
         googleMaps?.settings.myLocationButton = true
         googleMaps?.settings.compassButton = true
         googleMaps?.settings.zoomGestures = true
         
-        view = googleMaps
-        
-        
+
         createMarker(titleMarker: "Indian Parliament", latitude: startlocation.coordinate.latitude, longitude: startlocation.coordinate.longitude)
         createMarker(titleMarker: "Rashtrapati Bhavan", latitude: endLocation.coordinate.latitude, longitude: endLocation.coordinate.longitude)
         
         drawPath(startLocation: startlocation, endLocation: endLocation)
         getDistance(startLocation: startlocation, endLocation: endLocation)
         
+        //getAddress(address: "Parliament Of India,New Delhi")
         self.googleMaps?.animate(to: camera)
 
 
@@ -82,9 +73,12 @@ class ViewController: UIViewController {
         let origin = "\(startLocation.coordinate.latitude),\(startLocation.coordinate.longitude)"
         let destination = "\(endLocation.coordinate.latitude),\(endLocation.coordinate.longitude)"
         
-        
+        let startLocation1 = "Parliament+Of+India,New+Delhi"
+        let destination1 = "NDLS+Railway+Station,+New+Delhi"
+        let startLocation2 = "India+Gate,+New+Delhi"
+        let destinationLocation2 = "Indira+Gandhi+International+Airport,New+Delhi"
         //let url = "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&mode=driving&key=AIzaSyCeZMQyak_ixe9tVcsedmXEjfvOLwofAiA"
-        let url = "https://maps.googleapis.com/maps/api/directions/json?origin=Parliament+Of+India,New+Delhi&destination=NDLS+Railway+Station,+New+Delhi&mode=driving&key=AIzaSyCeZMQyak_ixe9tVcsedmXEjfvOLwofAiA&waypoints=optimize:true%7C28.613841,77.132252%7C28.613195,77.229488%7C28.641980,77.249560"
+        let url = "https://maps.googleapis.com/maps/api/directions/json?origin=\(startLocation1)&destination=\(destination1)&mode=driving&key=\(Constants.APIKey.rawValue)&waypoints=optimize:true%7C\(startLocation2)%7C\(destinationLocation2)%7C28.641980,77.249560"
         //let url = "https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood&key=AIzaSyCeZMQyak_ixe9tVcsedmXEjfvOLwofAiA"
         //let url = "https://maps.googleapis.com/maps/api/directions/json?origin=New Delhi Railway Station&destination=New Delhi Airport&mode=driving&key=AIzaSyCeZMQyak_ixe9tVcsedmXEjfvOLwofAiA"
         //let url = "http://maps.googleapis.com/maps/api/directions/json?origin=Adelaide,SA&destination=Adelaide,SA&waypoints=optimize:true|Barossa+Valley,SA|Clare,SA|Connawarra,SA|McLaren+Vale,SA&sensor=false&key=AIzaSyCeZMQyak_ixe9tVcsedmXEjfvOLwofAiA"
@@ -124,6 +118,43 @@ class ViewController: UIViewController {
         }
     }
     
+    func formQueryURL(startLocation: String, endLocation: String, wayPoints:[String]) -> String{
+        //"https://maps.googleapis.com/maps/api/directions/json?origin=\(startLocation1)&destination=\(destination1)&mode=driving&key=\(Constants.APIKey.rawValue)&waypoints=optimize:true%7C\(startLocation2)%7C\(destinationLocation2)%7C28.641980,77.249560"
+        
+        let queryURL = "https://maps.googleapis.com/maps/api/directions/json?origin=\(startLocation)&destination=\(endLocation)&mode=driving&key=\(Constants.APIKey.rawValue)"
+        let wayPoint = ""
+        
+        
+        return queryURL
+        
+    }
+    
+    func getCoordinates(from address:String){
+        
+        let key : String = Constants.APIKey.rawValue
+        let postParameters:[String: Any] = [ "address": address,"key":key]
+        let url : String = "https://maps.googleapis.com/maps/api/geocode/json"
+        
+        var location: CLLocation? = nil
+        
+        Alamofire.request(url, method: .get, parameters: postParameters, encoding: URLEncoding.default, headers: nil).responseJSON {  response in
+            
+            if let receivedResults = response.result.value
+            {
+                let resultParams = JSON(receivedResults)
+                print(resultParams) // RESULT JSON
+                print(resultParams["status"]) // OK, ERROR
+                print(resultParams["results"][0]["geometry"]["location"]["lat"].doubleValue) // approximately latitude
+                print(resultParams["results"][0]["geometry"]["location"]["lng"].doubleValue) // approximately longitude
+                
+                let latitute  = resultParams["results"][0]["geometry"]["location"]["lat"].doubleValue
+                let longitute = resultParams["results"][0]["geometry"]["location"]["lng"].doubleValue
+                
+                location = CLLocation(latitude: latitute, longitude: longitute)
+            }
+        }
+    }
+    
     func getDistance(startLocation: CLLocation, endLocation: CLLocation)
     {
         let origin = "\(startLocation.coordinate.latitude),\(startLocation.coordinate.longitude)"
@@ -152,6 +183,9 @@ class ViewController: UIViewController {
     }
 
 
+    @IBAction func getDirectionAction (_ sender: Any){
+        print("getDrirectionAction")
+    }
 }
 
 //MARK: CLLocationManagerDelegate
