@@ -32,5 +32,24 @@ class HistoryViewController: UIViewController {
             historyTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             historyTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             ])
+        
+        parsePlistData()
+    }
+    
+    
+    func parsePlistData(){
+        let plistData = ArchiveUtility.shared.readPlist()
+        
+        guard  let results = plistData else {
+            historyTextView.text = "No History Available!"
+            return
+        }
+        var stringToDisplay = ""
+        for result in results{
+            if let date = result["Date"], let startLocation = result["StartLocation"], let endLocation = result["EndLocation"]{
+                stringToDisplay.append("\(date) \nStart Location: \(startLocation)\nEnd  Location: \(endLocation)\n\n")
+            }
+        }
+        historyTextView.text = stringToDisplay
     }
 }
