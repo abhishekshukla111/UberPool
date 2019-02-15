@@ -39,8 +39,10 @@ class ViewController: UIViewController {
     
     @IBAction func getDirectionAction (_ sender: Any){
        
+        //Some Cleanup before draw
         resignAllTextfields()
-        //
+        googleMaps.clear()
+        
         var locationArray: [String] = []
         locationArray.append(startTextField1.text!)
         locationArray.append(destinationTextField1.text!)
@@ -68,6 +70,7 @@ class ViewController: UIViewController {
             let endLocation = clLocationArray[1]
             let wayPoints = Array(clLocationArray[2...])
             self.drawPath(startLocation: startlocation, endLocation: endLocation, wayPoints: wayPoints)
+            
         }
     }
     

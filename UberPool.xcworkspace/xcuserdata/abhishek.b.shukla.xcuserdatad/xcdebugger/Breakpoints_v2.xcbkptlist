@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UberPool/UBGoogleAPIHandler.swift"
-            timestampString = "571929178.4034311"
+            timestampString = "571929880.607632"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "45"
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UberPool/ViewController.swift"
-            timestampString = "571929178.403591"
+            timestampString = "571929880.607725"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "241"
-            endingLineNumber = "241"
+            startingLineNumber = "244"
+            endingLineNumber = "244"
             landmarkName = "validateAllTextFieldHasData()"
             landmarkType = "7">
          </BreakpointContent>
