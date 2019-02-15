@@ -124,7 +124,9 @@ class ViewController: UIViewController {
             self.addBounds(startLocation: startLocation, endLocation: endLocation, wayPoints: wayPoints)
             self.addMarkers(startLocation: startLocation, endLocation: endLocation, wayPoints: wayPoints)
             
-            let data = ["Date": "Feb 15", "StartLocation":"\(startLocation.coordinate.latitude), \(startLocation.coordinate.longitude)","EndLocation":"\(startLocation.coordinate.latitude), \(startLocation.coordinate.longitude)"]
+            let dateAndTime = self.getDataAndTime()
+            
+            let data = ["Date": dateAndTime, "StartLocation":"\(startLocation.coordinate.latitude), \(startLocation.coordinate.longitude)","EndLocation":"\(startLocation.coordinate.latitude), \(startLocation.coordinate.longitude)"]
             
             ArchiveUtility.shared.updateData(data: data)
             
@@ -178,6 +180,9 @@ class ViewController: UIViewController {
     
     @objc func historyButtonAction( _ sender: Any){
         print("History Button Clicked")
+        
+        let historyViewController = HistoryViewController()
+        self.navigationController?.pushViewController(historyViewController, animated: true)
     }
     
     private func resignAllTextfields(){
@@ -185,6 +190,22 @@ class ViewController: UIViewController {
         startTextField2.resignFirstResponder()
         destinationTextField1.resignFirstResponder()
         destinationTextField2.resignFirstResponder()
+    }
+    
+    private func getDataAndTime() -> String{
+        var dateAndTime = ""
+        let date = Date()
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
+        
+        if let year =  components.year, let month = components.month, let day = components.day, let hour = components.hour, let minute = components.minute {
+        
+            dateAndTime = "\(String(describing: day))/\(String(describing: month))/\(String(describing: year)) \(hour):\(String(describing: minute))"
+            
+            print(dateAndTime)
+        }
+    
+        return dateAndTime
     }
 }
 
